@@ -10,6 +10,7 @@ plugins {
 
 android {
     namespace = "com.example.sensy_patient_app"
+
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
