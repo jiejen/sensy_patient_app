@@ -33,6 +33,12 @@ class _HomePageState extends State<HomePage> {
                 Navigator.pushNamed(context, '/devicepairingpage');
               },
             ),
+            ElevatedButton(
+              child: const Text("Mapping"),
+              onPressed: () {
+                Navigator.pushNamed(context, '/footselectionscreen');
+              },
+            ),
             Container(
               alignment: Alignment.bottomRight,
               child: ElevatedButton(
