@@ -20,6 +20,10 @@ class _SessionScreenState extends State<SessionScreen> {
   int remainingSeconds = 0;
   Timer? sessionTimer;
 
+  // Paradigm selection variables
+  String selectedParadigm = "Standard";
+  bool setParadigmAsDefault = false;
+
   @override
   void dispose() {
     sessionTimer?.cancel();
@@ -62,6 +66,288 @@ class _SessionScreenState extends State<SessionScreen> {
     return '${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
   }
 
+  // Show paradigm selection dialog
+  void _showParadigmDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // Local variables for the dialog state
+        String tempSelectedParadigm = selectedParadigm;
+        bool tempSetAsDefault = setParadigmAsDefault;
+
+        return StatefulBuilder(builder: (context, setState) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Container(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Header with close button
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Paradigm of stimulation",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.close, color: Colors.grey),
+                        onPressed: () => Navigator.pop(context),
+                        padding: EdgeInsets.zero,
+                        constraints: BoxConstraints(),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16),
+
+                  // Standard option
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        tempSelectedParadigm = "Standard";
+                      });
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: tempSelectedParadigm == "Standard"
+                            ? Color(0xFFE8F4F8)
+                            : Colors.white,
+                        border: Border.all(
+                          color: tempSelectedParadigm == "Standard"
+                              ? const Color(0xFF5E8D9B)
+                              : Colors.grey.shade300,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        children: [
+                          if (tempSelectedParadigm == "Standard")
+                            Container(
+                              margin: EdgeInsets.only(right: 8),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: const Color(0xFF5E8D9B),
+                              ),
+                              child: Icon(
+                                Icons.check,
+                                color: Colors.white,
+                                size: 18,
+                              ),
+                            ),
+                          Text(
+                            "Standard",
+                            style: TextStyle(
+                              color: tempSelectedParadigm == "Standard"
+                                  ? const Color(0xFF5E8D9B)
+                                  : Colors.grey.shade600,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+
+                  // Advanced option
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        tempSelectedParadigm = "Advanced";
+                      });
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: tempSelectedParadigm == "Advanced"
+                            ? Color(0xFFE8F4F8)
+                            : Colors.white,
+                        border: Border.all(
+                          color: tempSelectedParadigm == "Advanced"
+                              ? const Color(0xFF5E8D9B)
+                              : Colors.grey.shade300,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        children: [
+                          if (tempSelectedParadigm == "Advanced")
+                            Container(
+                              margin: EdgeInsets.only(right: 8),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: const Color(0xFF5E8D9B),
+                              ),
+                              child: Icon(
+                                Icons.check,
+                                color: Colors.white,
+                                size: 18,
+                              ),
+                            ),
+                          Text(
+                            "Advanced",
+                            style: TextStyle(
+                              color: tempSelectedParadigm == "Advanced"
+                                  ? const Color(0xFF5E8D9B)
+                                  : Colors.grey.shade600,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+
+                  // Hybrid option
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        tempSelectedParadigm = "Hybrid";
+                      });
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: tempSelectedParadigm == "Hybrid"
+                            ? Color(0xFFE8F4F8)
+                            : Colors.white,
+                        border: Border.all(
+                          color: tempSelectedParadigm == "Hybrid"
+                              ? const Color(0xFF5E8D9B)
+                              : Colors.grey.shade300,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        children: [
+                          if (tempSelectedParadigm == "Hybrid")
+                            Container(
+                              margin: EdgeInsets.only(right: 8),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: const Color(0xFF5E8D9B),
+                              ),
+                              child: Icon(
+                                Icons.check,
+                                color: Colors.white,
+                                size: 18,
+                              ),
+                            ),
+                          Text(
+                            "Hybrid",
+                            style: TextStyle(
+                              color: tempSelectedParadigm == "Hybrid"
+                                  ? const Color(0xFF5E8D9B)
+                                  : Colors.grey.shade600,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+
+                  // Set as default toggle
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            tempSetAsDefault = !tempSetAsDefault;
+                          });
+                        },
+                        child: Container(
+                          width: 44,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            color: tempSetAsDefault
+                                ? const Color(0xFF5E8D9B)
+                                : Colors.grey[300],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                right: tempSetAsDefault ? 2 : null,
+                                left: tempSetAsDefault ? null : 2,
+                                top: 2,
+                                child: Container(
+                                  width: 20,
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        "Set up as a default setting",
+                        style: TextStyle(
+                          color: const Color(0xFF5E8D9B),
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+
+                  // Save button
+                  ElevatedButton(
+                    onPressed: () {
+                      // Update the main state with selected values
+                      this.setState(() {
+                        selectedParadigm = tempSelectedParadigm;
+                        setParadigmAsDefault = tempSetAsDefault;
+                      });
+                      Navigator.pop(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF5E8D9B),
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                    child: Text(
+                      "Save",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,10 +355,7 @@ class _SessionScreenState extends State<SessionScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: const Color(0xFF5E8D9B)),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        automaticallyImplyLeading: false, // Remove back arrow
         title: Row(
           children: [
             Text(
@@ -585,9 +868,9 @@ class _SessionScreenState extends State<SessionScreen> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        // Handle change location
+                        // Navigate to foot selection screen
                         Navigator.of(context)
-                            .pop(); // Return to previous screen
+                            .pop(); // Return to the foot selection screen
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF5E8D9B),
@@ -605,6 +888,7 @@ class _SessionScreenState extends State<SessionScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         // Handle change paradigm
+                        _showParadigmDialog();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF5E8D9B),
