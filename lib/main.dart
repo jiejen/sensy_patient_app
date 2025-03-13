@@ -11,6 +11,7 @@ import 'screens/home_page.dart';
 import 'screens/sign_in_page.dart';
 import 'screens/bluetooth_page.dart';
 import 'screens/Foot_Selection_Screen.dart';
+import 'screens/Session_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -106,7 +107,8 @@ class MyApp extends StatelessWidget {
           '/bluetoothpage': (context) => BluetoothPage(),
           '/bluetoothoffpage': (context) => BluetoothOffPage(),
           '/dummypage': (context) => DummyPage(),
-          '/footselectionscreen': (context) => FootMappingScreen()
+          '/footselectionscreen': (context) => FootMappingScreen(),
+          '/sessionscreen': (context) => SessionScreen(),
         });
   }
 }

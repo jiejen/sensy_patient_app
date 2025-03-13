@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sensy_patient_app/screens/Session_screen.dart';
 
 /// A screen that displays an interactive foot diagram with 16 tappable areas
 /// to match the design shown in the image.
@@ -310,7 +311,12 @@ class _FootMappingScreenState extends State<FootMappingScreen> {
                 ),
                 padding: EdgeInsets.symmetric(vertical: 18), // Slightly larger
               ),
-              onPressed: _selectedAreas.isNotEmpty ? () {} : null,
+              onPressed: _selectedAreas.isNotEmpty
+                  ? () {
+                      // Navigate to the session screen using named route
+                      Navigator.of(context).pushNamed('/sessionscreen');
+                    }
+                  : null,
               child: Text(
                 "I have inserted all locations where I feel pain",
                 style: TextStyle(
@@ -461,7 +467,6 @@ class _FootSelectionWidgetState extends State<FootSelectionWidget> {
                               .withOpacity(0.4) // Selected: transparent blue
                           : Colors
                               .transparent, // Unselected: completely invisible
-                      // Remove the border that would make areas visible when not selected
                       borderRadius: BorderRadius.circular(4),
                     ),
                   ),
